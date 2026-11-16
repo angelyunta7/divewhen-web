@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DiveWhen · Muy pronto</title>
+<meta name="description" content="DiveWhen: qué ver, dónde y cuándo bucear. Temporadas de especies, centros y precios publicados. Muy pronto.">
+<!-- Quitar noindex el día que se abra (decisión pendiente: indexación). -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#04141f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%230a2a3d' stroke='%232ee6c8' stroke-width='4'/%3E%3Cpath d='M14 34c8-6 14 6 22 0s12-6 14-2' stroke='%232ee6c8' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --abyss: #04141f; --deep: #0a2a3d; --foam: #e8f4f2; --mist: #8fb3b8;
+    --ws: #2ee6c8; --hammer: #ff8a3d; --manta: #d96cff; --owt: #ffe14a;
+    --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: radial-gradient(120% 80% at 50% -10%, #0e3b54 0%, var(--deep) 35%, var(--abyss) 75%);
+    color: var(--foam); font: 400 16px/1.5 var(--body); overflow-x: hidden;
+  }
+  canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  .rays { position: fixed; inset: 0; pointer-events: none; opacity: .5;
+    background: repeating-conic-gradient(from 180deg at 50% -20%, rgba(255,255,255,.05) 0deg 3deg, transparent 3deg 11deg);
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 70%); -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 70%);
+    animation: sway 14s ease-in-out infinite alternate; }
+  @keyframes sway { from { transform: rotate(-2deg) scale(1.1); } to { transform: rotate(2deg) scale(1.1); } }
+  main { position: relative; z-index: 1; min-height: 100%; display: grid; place-items: center; padding: 40px 16px 32px; }
+  .wrap { width: min(680px, 100%); text-align: center; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px;
+    font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--owt);
+    border: 1px solid rgba(255,225,74,.45); background: rgba(255,225,74,.07); }
+  .badge i { width: 8px; height: 8px; border-radius: 50%; background: var(--owt); box-shadow: 0 0 0 0 rgba(255,225,74,.6); animation: ping 2s infinite; }
+  @keyframes ping { 70% { box-shadow: 0 0 0 10px rgba(255,225,74,0); } 100% { box-shadow: 0 0 0 0 rgba(255,225,74,0); } }
+  h1 { font: 800 clamp(48px, 12vw, 96px)/.95 var(--display); letter-spacing: -.03em; margin: 22px 0 10px;
+    background: linear-gradient(180deg, #fff 30%, var(--ws) 140%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font: 600 clamp(18px, 4.4vw, 24px)/1.3 var(--display); margin: 0 0 8px; }
+  .sub { color: var(--mist); margin: 0 auto 30px; max-width: 520px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 0 28px; }
+  .card { padding: 16px 12px; border-radius: 14px; background: rgba(6,24,36,.62); border: 1px solid rgba(143,179,184,.22);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); text-align: left; }
+  .card b { display: block; font: 800 26px/1 var(--display); margin-bottom: 6px; }
+  .card span { font-size: 13px; color: var(--mist); }
+  .c1 b { color: var(--ws); } .c2 b { color: var(--hammer); } .c3 b { color: var(--manta); }
+  .langs { font: 400 13px/1.5 var(--mono); color: var(--mist); margin: 0 0 18px; }
+  .langs span + span::before { content: " · "; opacity: .5; }
+  footer { font-size: 12px; color: rgba(143,179,184,.75); }
+  footer a { color: inherit; }
+  @media (max-width: 560px) { .cards { grid-template-columns: 1fr; } .card { display: flex; align-items: baseline; gap: 10px; } .card b { margin: 0; min-width: 84px; } }
+  @media (prefers-reduced-motion: reduce) { .rays, .badge i { animation: none; } }
+</style>
+</head>
+<body>
+<canvas id="sea" aria-hidden="true"></canvas>
+<div class="rays" aria-hidden="true"></div>
+<main>
+  <div class="wrap">
+    <span class="badge"><i></i>En obras · muy pronto</span>
+    <h1>DiveWhen</h1>
+    <p class="lead">Qué ver, dónde y cuándo bucear.</p>
+    <p class="sub">Un atlas para planear tus inmersiones: la temporada de cada especie mes a mes, centros de buceo y precios publicados, con datos abiertos y siempre con su fuente.</p>
+    <div class="cards">
+      <div class="card c1"><b>30</b><span>especies, de tiburones ballena a nudibranquios</span></div>
+      <div class="card c2"><b>49</b><span>zonas de buceo con su mejor época</span></div>
+      <div class="card c3"><b>3.000+</b><span>centros de costa en el mapa</span></div>
+    </div>
+    <p class="langs"><span>Bientôt en français</span><span>Coming soon in English</span></p>
+    <footer>Datos: GBIF · OBIS · © colaboradores de OpenStreetMap. Guía orientativa, no un consejo de seguridad.</footer>
+  </div>
+</main>
+<script>
+// Fondo: globo de puntos girando despacio y burbujas que suben. Sin librerías.
+(() => {
+  const cv = document.getElementById("sea"), cx = cv.getContext("2d");
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W, H, R, dpr, pts = [], bubbles = [];
+  // Puntos repartidos por la esfera (espiral de Fibonacci).
+  for (let i = 0, n = 900; i < n; i++) {
+    const y = 1 - (i / (n - 1)) * 2, r = Math.sqrt(1 - y * y), th = i * 2.399963;
+    pts.push([Math.cos(th) * r, y, Math.sin(th) * r]);
+  }
+  const hot = new Set(Array.from({ length: 26 }, (_, i) => (i * 131 + 47) % pts.length)); // «zonas» que brillan
+  const COLORS = ["#2ee6c8", "#ff8a3d", "#d96cff", "#ffe14a"];
+  function size() {
+    dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    R = Math.min(W, H) * (W < 600 ? 0.62 : 0.5);
+    bubbles = Array.from({ length: Math.round(W / 18) }, () => newBubble(true));
+  }
+  function newBubble(any) {
+    return { x: Math.random() * W, y: any ? Math.random() * H : H + 10, r: 1 + Math.random() * 3.5, v: .25 + Math.random() * .7, w: Math.random() * 6.28 };
+  }
+  function frame(t) {
+    cx.clearRect(0, 0, W, H);
+    const a = still ? 0.6 : t / 26000, ca = Math.cos(a), sa = Math.sin(a), tilt = 0.35, ct = Math.cos(tilt), st = Math.sin(tilt);
+    const gx = W / 2, gy = H * 0.58;
+    const g = cx.createRadialGradient(gx - R * .3, gy - R * .35, R * .1, gx, gy, R * 1.05);
+    g.addColorStop(0, "rgba(46,230,200,.10)"); g.addColorStop(1, "rgba(4,20,31,0)");
+    cx.fillStyle = g; cx.beginPath(); cx.arc(gx, gy, R * 1.05, 0, 6.283); cx.fill();
+    pts.forEach((p, i) => {
+      let x = p[0] * ca - p[2] * sa, z = p[0] * sa + p[2] * ca, y = p[1];
+      const y2 = y * ct - z * st, z2 = y * st + z * ct;
+      if (z2 < -0.05) return;
+      const s = 0.4 + z2 * 0.6, isHot = hot.has(i);
+      cx.fillStyle = isHot ? COLORS[i % 4] : `rgba(143,179,184,${0.12 + z2 * 0.35})`;
+      cx.beginPath(); cx.arc(gx + x * R, gy + y2 * R, (isHot ? 2.6 : 1.2) * s, 0, 6.283); cx.fill();
+      if (isHot) { cx.globalAlpha = .18 * s; cx.beginPath(); cx.arc(gx + x * R, gy + y2 * R, 9 * s, 0, 6.283); cx.fill(); cx.globalAlpha = 1; }
+    });
+    cx.strokeStyle = "rgba(232,244,242,.35)";
+    for (const b of bubbles) {
+      if (!still) { b.y -= b.v; b.w += .02; if (b.y < -10) Object.assign(b, newBubble(false)); }
+      cx.lineWidth = 1; cx.beginPath(); cx.arc(b.x + Math.sin(b.w) * 4, b.y, b.r, 0, 6.283); cx.stroke();
+    }
+    if (!still) requestAnimationFrame(frame);
+  }
+  addEventListener("resize", () => { size(); if (still) frame(0); });
+  size(); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
